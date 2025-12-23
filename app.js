@@ -94,7 +94,7 @@ async function init() {
 
             const picked = viewer.scene.pick(movement.position);
             if (Cesium.defined(picked) && picked.id === hotspot) {
-                window.open("pano/index.html", "_blank");
+                window.open("pano/pano1.html", "_blank");
             }
         }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
 
@@ -165,5 +165,6 @@ async function init() {
 }
 
 init();
+
 
 
