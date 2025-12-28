@@ -9,6 +9,11 @@ html, body {
     background: linear-gradient(to bottom, #417bfa 50%, #ffffff 100%);
 }
 
+#cesiumContainer {
+        height: 100dvh; /* dynamic viewport height */
+        }
+
+
 /* PANEL GÓRNY */
 #topPanel {
     position: absolute;
