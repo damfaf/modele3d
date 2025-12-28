@@ -282,30 +282,6 @@ window.addEventListener("resize", () => engine.resize());
     userInteracted = false;
   };
 
-  document.getElementById("autoCenterBtn").onclick = () => {
-    if (!camera || !initialTarget) return;
-    camera.setTarget(initialTarget);
-  };
-
-  // document.getElementById("toggleGroundBtn").onclick = () => {
-  //   if (!ground) return;
-  //   ground.isVisible = !ground.isVisible;
-  //   document.getElementById("toggleGroundBtn").classList.toggle("active", ground.isVisible);
-  // };
-
-  // document.getElementById("toggleLightBtn").onclick = () => {
-  //   if (!dirLight) return;
-  //   const enabled = dirLight.isEnabled();
-  //   dirLight.setEnabled(!enabled);
-  //   document.getElementById("toggleLightBtn").classList.toggle("active", !enabled);
-  // };
-
-  // document.getElementById("resetLightBtn").onclick = () => {
-  //   if (!hemiLight || !dirLight) return;
-  //   hemiLight.intensity = defaultHemiIntensity;
-  //   dirLight.intensity = defaultDirIntensity;
-  // };
-
   document.getElementById("autoRotateBtn").onclick = () => {
     setAutoRotate(!autoRotate);
   };
