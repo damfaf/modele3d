@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <title>Kościół w Pożarzysku - Model 3D</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Babylon.js + Loaders -->
+  <script src="https://cdn.babylonjs.com/babylon.js"></script>
+  <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+</head>
+
+<body>
+
+<!-- Loader -->
+<div id="loading">
+  <div id="loadingText">
+    WCZYTYWANIE MODELU 3D<span id="dots"></span>
+  </div>
+  <div id="progressContainer">
+    <div id="progressBar"></div>
+  </div>
+</div>
+
+<!-- Panel przycisków – góra prawa -->
+<div id="ui">
+  <!-- Podstawowe -->
+  <button class="btn" id="resetBtn">Reset</button>
+  <button class="btn" id="autoCenterBtn">Auto‑center</button>
+  <button class="btn" id="toggleGroundBtn" title="Pokaż/ukryj podłogę">Podłoga</button>
+  <button class="btn" id="toggleLightBtn" title="Włącz/wyłącz światło kierunkowe">Światło</button>
+  <button class="btn" id="resetLightBtn" title="Przywróć domyślne światło">Reset światła</button>
+  <button class="btn" id="autoRotateBtn" title="Automatyczny obrót modelu">Auto obrót</button>
+  <button class="btn" id="fullscreenBtn">Fullscreen</button>
+
+  <!-- HDRI -->
+  <button class="btn" id="envStudioBtn">HDRI: Studio</button>
+  <button class="btn" id="envDayBtn">HDRI: Dzień</button>
+  <button class="btn" id="envNightBtn">HDRI: Noc</button>
+</div>
+
+<!-- Sterowanie kamerą – dół środek -->
+<div id="controls">
+  <button class="btn" id="moveLeft" title="Przesuń widok w lewo">←</button>
+  <button class="btn" id="moveRight" title="Przesuń widok w prawo">→</button>
+  <button class="btn" id="zoomIn" title="Przybliż">+</button>
+  <button class="btn" id="zoomOut" title="Oddal">−</button>
+  <button class="btn" id="rotateLeft" title="Obrót w lewo">⟲</button>
+  <button class="btn" id="rotateRight" title="Obrót w prawo">⟳</button>
+</div>
+
+<!-- Presety widoku – dół lewa -->
+<div id="views">
+  <div id="viewsTitle">Widoki</div>
+  <div class="view-row">
+    <button class="btn" id="viewFront">Przód</button>
+    <button class="btn" id="viewBack">Tył</button>
+  </div>
+  <div class="view-row">
+    <button class="btn" id="viewLeft">Lewo</button>
+    <button class="btn" id="viewRight">Prawo</button>
+  </div>
+  <div class="view-row">
+    <button class="btn" id="viewTop">Góra</button>
+    <button class="btn" id="viewIso">Izometria</button>
+  </div>
+</div>
+
+<!-- Legenda skrótów -->
+<div id="legend">
+  <b>Skróty:</b><br>
+  LPM – obrót kamery<br>
+  PPM – przesuwanie widoku<br>
+  Scroll – zoom<br>
+  R – reset widoku<br>
+  Spacja – auto obrót ON/OFF
+</div>
+
+<canvas id="renderCanvas"></canvas>
+
+<script src="script.js"></script>
+
+
+</body>
+</html>
