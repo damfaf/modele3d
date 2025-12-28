@@ -47,6 +47,11 @@ async function createScene() {
     scene
   );
   camera.attachControl(canvas, true);
+  // 🔥 ZMNIEJSZA SIŁĘ ZOOMU NA TELEFONIE
+  camera.pinchPrecision = 200;          // im większe, tym wolniejszy zoom
+  camera.pinchDeltaPercentage = 0.002;  // dodatkowa kontrola czułości
+
+
   camera.wheelDeltaPercentage = 0.02;
   camera.panningSensibility = 500;
 
