@@ -1,4 +1,4 @@
-  const lamp = document.getElementById("lamp");
+const lamp = document.getElementById("lamp");
 const lampText = document.getElementById("lampText");
 
 function setLamp(color, text) {
@@ -337,24 +337,24 @@ const canvas = document.getElementById("renderCanvas");
     camera.setTarget(initialTarget);
   };
 
-  document.getElementById("toggleGroundBtn").onclick = () => {
-    if (!ground) return;
-    ground.isVisible = !ground.isVisible;
-    document.getElementById("toggleGroundBtn").classList.toggle("active", ground.isVisible);
-  };
+  // document.getElementById("toggleGroundBtn").onclick = () => {
+  //   if (!ground) return;
+  //   ground.isVisible = !ground.isVisible;
+  //   document.getElementById("toggleGroundBtn").classList.toggle("active", ground.isVisible);
+  // };
 
-  document.getElementById("toggleLightBtn").onclick = () => {
-    if (!dirLight) return;
-    const enabled = dirLight.isEnabled();
-    dirLight.setEnabled(!enabled);
-    document.getElementById("toggleLightBtn").classList.toggle("active", !enabled);
-  };
+  // document.getElementById("toggleLightBtn").onclick = () => {
+  //   if (!dirLight) return;
+  //   const enabled = dirLight.isEnabled();
+  //   dirLight.setEnabled(!enabled);
+  //   document.getElementById("toggleLightBtn").classList.toggle("active", !enabled);
+  // };
 
-  document.getElementById("resetLightBtn").onclick = () => {
-    if (!hemiLight || !dirLight) return;
-    hemiLight.intensity = defaultHemiIntensity;
-    dirLight.intensity = defaultDirIntensity;
-  };
+  // document.getElementById("resetLightBtn").onclick = () => {
+  //   if (!hemiLight || !dirLight) return;
+  //   hemiLight.intensity = defaultHemiIntensity;
+  //   dirLight.intensity = defaultDirIntensity;
+  // };
 
   document.getElementById("autoRotateBtn").onclick = () => {
     setAutoRotate(!autoRotate);
@@ -368,10 +368,10 @@ const canvas = document.getElementById("renderCanvas");
     }
   };
 
-  // HDRI przyciski
-  document.getElementById("envStudioBtn").onclick = () => setHDRI("studio", camera?.getScene());
-  document.getElementById("envDayBtn").onclick = () => setHDRI("day", camera?.getScene());
-  document.getElementById("envNightBtn").onclick = () => setHDRI("night", camera?.getScene());
+  // // HDRI przyciski
+  // document.getElementById("envStudioBtn").onclick = () => setHDRI("studio", camera?.getScene());
+  // document.getElementById("envDayBtn").onclick = () => setHDRI("day", camera?.getScene());
+  // document.getElementById("envNightBtn").onclick = () => setHDRI("night", camera?.getScene());
 
   // --- PRZYCISKI DOLNE (sterowanie kamerą) ---
 

@@ -94,7 +94,7 @@ const canvas = document.getElementById("renderCanvas");
     // Wczytanie modelu z progressem
     const result = await BABYLON.SceneLoader.ImportMeshAsync(
       "",
-      "https://r2-proxy.damian-fafula.workers.dev/", "ksiaz16k_local.glb",
+      "https://r2-proxy.damian-fafula.workers.dev/", "kosciol3.glb",
       scene,
       (event) => {
         if (event.lengthComputable) {
@@ -386,24 +386,24 @@ const canvas = document.getElementById("renderCanvas");
     camera.setTarget(initialTarget);
   };
 
-  document.getElementById("toggleGroundBtn").onclick = () => {
-    if (!ground) return;
-    ground.isVisible = !ground.isVisible;
-    document.getElementById("toggleGroundBtn").classList.toggle("active", ground.isVisible);
-  };
+  // document.getElementById("toggleGroundBtn").onclick = () => {
+  //   if (!ground) return;
+  //   ground.isVisible = !ground.isVisible;
+  //   document.getElementById("toggleGroundBtn").classList.toggle("active", ground.isVisible);
+  // };
 
-  document.getElementById("toggleLightBtn").onclick = () => {
-    if (!dirLight) return;
-    const enabled = dirLight.isEnabled();
-    dirLight.setEnabled(!enabled);
-    document.getElementById("toggleLightBtn").classList.toggle("active", !enabled);
-  };
+  // document.getElementById("toggleLightBtn").onclick = () => {
+  //   if (!dirLight) return;
+  //   const enabled = dirLight.isEnabled();
+  //   dirLight.setEnabled(!enabled);
+  //   document.getElementById("toggleLightBtn").classList.toggle("active", !enabled);
+  // };
 
-  document.getElementById("resetLightBtn").onclick = () => {
-    if (!hemiLight || !dirLight) return;
-    hemiLight.intensity = defaultHemiIntensity;
-    dirLight.intensity = defaultDirIntensity;
-  };
+  // document.getElementById("resetLightBtn").onclick = () => {
+  //   if (!hemiLight || !dirLight) return;
+  //   hemiLight.intensity = defaultHemiIntensity;
+  //   dirLight.intensity = defaultDirIntensity;
+  // };
 
   document.getElementById("autoRotateBtn").onclick = () => {
     setAutoRotate(!autoRotate);
