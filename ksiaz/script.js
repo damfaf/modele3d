@@ -35,6 +35,7 @@ const canvas = document.getElementById("renderCanvas");
   }, 500);
 
 async function createScene() {
+    BABYLON.Engine.UseKTX2 = true;
     const scene = new BABYLON.Scene(engine);
     scene.clearColor = new BABYLON.Color4(0.02, 0.03, 0.06, 1.0);
 
@@ -110,6 +111,7 @@ async function createScene() {
         }
       }
     );
+    window.result = result;
 
     // Maksymalna jakość materiałów PBR
     result.meshes.forEach(m => {

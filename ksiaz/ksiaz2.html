@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Kościół w Pożarzysku - Model 3D i wirtualne zwiedzanie</title>
+
+    <!-- CesiumJS -->
+    <script src="https://cesium.com/downloads/cesiumjs/releases/1.136/Build/Cesium/Cesium.js"></script>
+    <link href="https://cesium.com/downloads/cesiumjs/releases/1.136/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- PANEL GÓRNY -->
+    <div id="topPanel">
+        
+        <button id="resetViewBtn" class="panel-button">
+            Resetuj widok
+        </button>
+
+        <div class="toggle-wrapper">
+            <span class="toggle-label">Wirtualne zwiedzanie</span>
+            <div id="hotspotToggle" class="toggle-switch">
+                <div class="toggle-knob"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="cesiumContainer"></div>
+    <script src="app.js"></script>
+</body>
+</html>
