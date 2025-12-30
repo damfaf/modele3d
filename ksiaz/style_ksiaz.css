@@ -1,0 +1,318 @@
+/* ===========================
+   GLOBAL + DPI SCALING (UI ONLY)
+=========================== */
+:root {
+    --ui-scale: calc(1 * (100dpi / 96));
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: #05070a;
+    font-family: system-ui, sans-serif;
+}
+
+/* Canvas */
+#renderCanvas {
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+    cursor: grab;
+}
+#renderCanvas:active {
+    cursor: grabbing;
+}
+
+/* ===========================
+   FULLSCREEN LOADER (NO UI SCALE)
+=========================== */
+#loading {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+
+    background: radial-gradient(circle at top, #20253a 0, #05070a 55%, #000 100%);
+    color: #f3f3f3;
+
+    /* ⭐ Loader NIE używa var(--ui-scale) */
+    font-size: 18px;
+
+    width: 100vw;
+    max-width: 100vw;
+    padding: 0 16px;
+    box-sizing: border-box;
+
+    text-align: center;
+    z-index: 10;
+
+    /* ⭐ Loader NIE może być skalowany */
+    transform: none !important;
+}
+
+/* Tekst ładowania — zawsze się łamie */
+#loadingText {
+    display: block;
+
+    /* ⭐ Dynamiczny rozmiar czcionki zależny od ekranu, NIE od DPI */
+    font-size: clamp(14px, 4vw, 20px);
+
+    max-width: 100%;
+    width: 100%;
+
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: break-word;
+
+    line-height: 1.3;
+    text-align: center;
+}
+
+/* Kropki */
+#dots {
+    display: inline-block;
+    min-width: 1ch;
+}
+
+/* Progress bar — responsywny */
+#progressContainer {
+    width: 60vw;          /* ⭐ automatyczne zmniejszanie */
+    max-width: 260px;     /* limit na dużych ekranach */
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.1);
+    overflow: hidden;
+}
+
+#progressBar {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #4fd1ff, #9f7aea);
+    border-radius: 999px;
+    transition: width 0.15s linear;
+}
+
+/* ===========================
+   UI PANELS (scaled)
+=========================== */
+.ui {
+    transform: scale(var(--ui-scale));
+    transform-origin: top right;
+}
+
+/* Top-left panel */
+#topPanel {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 200px;
+    padding: 12px;
+    background: rgba(50, 50, 50, 0.85);
+    border-radius: 8px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Buttons */
+.panel-button {
+    width: 100%;
+    padding: 6px 0;
+    background: #d0d0d0;
+    color: #000;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.panel-button:hover {
+    background: #e0e0e0;
+}
+
+/* Toggle row */
+.toggle-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    color: white;
+    font-size: 14px;
+}
+
+/* Toggle switch */
+.toggle-switch {
+    width: 50px;
+    height: 26px;
+    background: #888;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.25s ease;
+    position: relative;
+}
+.toggle-switch.on {
+    background: #4cd964;
+}
+
+/* Toggle knob */
+.toggle-knob {
+    width: 22px;
+    height: 22px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: left 0.25s ease;
+}
+.toggle-switch.on .toggle-knob {
+    left: 26px;
+}
+
+/* ===========================
+   TOP-RIGHT BUTTON PANEL
+=========================== */
+#ui {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    z-index: 20;
+    max-width: 360px;
+    justify-content: flex-end;
+}
+
+.btn {
+    padding: 8px 12px;
+    background: rgba(20,20,35,0.9);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 12px;
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+    transition: 0.18s;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+}
+.btn:hover {
+    background: rgba(40,40,70,0.95);
+    transform: translateY(-1px);
+}
+.btn.active {
+    border-color: #4fd1ff;
+    background: rgba(79,209,255,0.18);
+}
+
+/* ===========================
+   BOTTOM PANELS
+=========================== */
+#controls {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 20;
+}
+
+#views {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    z-index: 20;
+}
+
+#viewsTitle {
+    color: #aaa;
+    font-size: 11px;
+    margin-bottom: 2px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.view-row {
+    display: flex;
+    gap: 6px;
+}
+
+#legend {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 14px;
+    background: rgba(8,10,20,0.9);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 12px;
+    line-height: 1.4;
+    backdrop-filter: blur(8px);
+    z-index: 20;
+    max-width: 220px;
+}
+
+#legend b {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #9f7aea;
+}
+
+/* ===========================
+   MOBILE MODE
+=========================== */
+@media (max-width: 640px) {
+
+    :root {
+        --ui-scale: 1.6;
+    }
+
+    #ui {
+        max-width: 100%;
+        left: 10px;
+        right: 10px;
+        justify-content: center;
+    }
+
+    #legend,
+    #views {
+        display: none;
+    }
+
+    #topPanel {
+        width: calc(100% - 20px);
+        left: 10px;
+        right: 10px;
+    }
+
+    .panel-button {
+        font-size: 13px;
+        padding: 8px;
+    }
+
+    .btn {
+        font-size: 11px;
+        padding: 6px 10px;
+    }
+
+    #controls {
+        bottom: 10px;
+        gap: 6px;
+    }
+}
