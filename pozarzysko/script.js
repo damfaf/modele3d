@@ -90,7 +90,7 @@ async function createScene() {
   const result = await BABYLON.SceneLoader.ImportMeshAsync(
     "",
     "https://r2-proxy.damian-fafula.workers.dev/",
-    "kosciol3.glb",
+    "ksiaz2.glb",
     scene,
     (event) => {
       if (event.lengthComputable) {
@@ -273,14 +273,100 @@ window.addEventListener("resize", () => engine.resize());
 
   // --- PRZYCISKI GÓRNE ---
 
-  document.getElementById("resetBtn").onclick = () => {
-    if (!camera || !initialTarget) return;
-    camera.setTarget(initialTarget);
-    camera.radius = initialRadius;
-    camera.alpha = initialAlpha;
-    camera.beta = initialBeta;
-    userInteracted = false;
-  };
+document.getElementById("resetBtn").onclick = () => {
+  if (!camera || !initialTarget) return;
+
+  autoRotate = false;
+  userInteracted = false;
+
+  const fps = 60;
+  const duration = 45;
+
+  const ease = new BABYLON.CubicEase();
+  ease.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEINOUT);
+
+  // --- alpha ---
+  const a1 = BABYLON.Animation.CreateAndStartAnimation(
+    "resetAlpha",
+    camera,
+    "alpha",
+    fps,
+    duration,
+    camera.alpha,
+    initialAlpha,
+    0
+  );
+  a1.setEasingFunction(ease);
+
+  // --- beta ---
+  const a2 = BABYLON.Animation.CreateAndStartAnimation(
+    "resetBeta",
+    camera,
+    "beta",
+    fps,
+    duration,
+    camera.beta,
+    initialBeta,
+    0
+  );
+  a2.setEasingFunction(ease);
+
+  // --- radius ---
+  const a3 = BABYLON.Animation.CreateAndStartAnimation(
+    "resetRadius",
+    camera,
+    "radius",
+    fps,
+    duration,
+    camera.radius,
+    initialRadius,
+    0
+  );
+  a3.setEasingFunction(ease);
+
+  // --- target.x ---
+  const a4 = BABYLON.Animation.CreateAndStartAnimation(
+    "resetTargetX",
+    camera.target,
+    "x",
+    fps,
+    duration,
+    camera.target.x,
+    initialTarget.x,
+    0
+  );
+  a4.setEasingFunction(ease);
+
+  // --- target.y ---
+  const a5 = BABYLON.Animation.CreateAndStartAnimation(
+    "resetTargetY",
+    camera.target,
+    "y",
+    fps,
+    duration,
+    camera.target.y,
+    initialTarget.y,
+    0
+  );
+  a5.setEasingFunction(ease);
+
+  // --- target.z ---
+  const a6 = BABYLON.Animation.CreateAndStartAnimation(
+    "resetTargetZ",
+    camera.target,
+    "z",
+    fps,
+    duration,
+    camera.target.z,
+    initialTarget.z,
+    0
+  );
+  a6.setEasingFunction(ease);
+};
+
+
+
+
 
   document.getElementById("autoRotateBtn").onclick = () => {
     setAutoRotate(!autoRotate);

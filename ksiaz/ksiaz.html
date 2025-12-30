@@ -8,6 +8,9 @@
   <!-- Babylon.js + Loaders -->
   <script src="https://cdn.babylonjs.com/babylon.js"></script>
   <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
 </head>
 
 <body>
@@ -26,17 +29,8 @@
 <div id="ui">
   <!-- Podstawowe -->
   <button class="btn" id="resetBtn">Reset</button>
-  <button class="btn" id="autoCenterBtn">Auto‑center</button>
-  <button class="btn" id="toggleGroundBtn" title="Pokaż/ukryj podłogę">Podłoga</button>
-  <button class="btn" id="toggleLightBtn" title="Włącz/wyłącz światło kierunkowe">Światło</button>
-  <button class="btn" id="resetLightBtn" title="Przywróć domyślne światło">Reset światła</button>
   <button class="btn" id="autoRotateBtn" title="Automatyczny obrót modelu">Auto obrót</button>
   <button class="btn" id="fullscreenBtn">Fullscreen</button>
-
-  <!-- HDRI -->
-  <button class="btn" id="envStudioBtn">HDRI: Studio</button>
-  <button class="btn" id="envDayBtn">HDRI: Dzień</button>
-  <button class="btn" id="envNightBtn">HDRI: Noc</button>
 </div>
 
 <!-- Sterowanie kamerą – dół środek -->
@@ -54,15 +48,18 @@
   <div id="viewsTitle">Widoki</div>
   <div class="view-row">
     <button class="btn" id="viewFront">Przód</button>
+  </div>
+  <div class="view-row">
     <button class="btn" id="viewBack">Tył</button>
   </div>
   <div class="view-row">
     <button class="btn" id="viewLeft">Lewo</button>
+  </div>
+  <div class="view-row">
     <button class="btn" id="viewRight">Prawo</button>
   </div>
   <div class="view-row">
     <button class="btn" id="viewTop">Góra</button>
-    <button class="btn" id="viewIso">Izometria</button>
   </div>
 </div>
 
