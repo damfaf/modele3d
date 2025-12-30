@@ -30,7 +30,7 @@ async function init() {
 
     try {
         // Ładowanie modelu
-        const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(4308381, {
+        const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(4308395, {
             modelMatrix: Cesium.Transforms.eastNorthUpToFixedFrame(
                 Cesium.Cartesian3.fromDegrees(0, 0)
             ),
