@@ -20,6 +20,9 @@ async function init() {
         }
     });
 
+    // 🔵 RESPONSYWNOŚĆ — dopasowanie do telefonu
+    window.addEventListener("resize", () => viewer.resize());
+
     const scene = viewer.scene;
 
     // Wyłączamy tło Cesium
@@ -38,21 +41,39 @@ async function init() {
 
         scene.primitives.add(tileset);
 
-        // Ustawiamy kamerę na model
-        //await viewer.zoomTo(tileset);
+        // 🔵 Funkcja wykrywania telefonu
+        function isMobile() {
+            return window.innerWidth < 768;
+        }
 
-        viewer.camera.setView({
-            destination: Cesium.Cartesian3.fromDegrees(
-                -0.00021,   // długość geograficzna
-                0.00008,   // szerokość geograficzna
-                8   // wysokość kamery w metrach
-            ),
-            orientation: {
-                heading: Cesium.Math.toRadians(77),     // obrót w poziomie
-                pitch: Cesium.Math.toRadians(-18),     // nachylenie kamery
-                roll: 0
-            }
-        });
+        // 🔵 Ustawienie kamery — inne dla telefonu
+        if (isMobile()) {
+            viewer.camera.setView({
+                destination: Cesium.Cartesian3.fromDegrees(
+                    -0.00021,
+                    0.00008,
+                    14
+                ),
+                orientation: {
+                    heading: Cesium.Math.toRadians(77),
+                    pitch: Cesium.Math.toRadians(-25),
+                    roll: 0
+                }
+            });
+        } else {
+            viewer.camera.setView({
+                destination: Cesium.Cartesian3.fromDegrees(
+                    -0.00021,
+                    0.00008,
+                    8
+                ),
+                orientation: {
+                    heading: Cesium.Math.toRadians(77),
+                    pitch: Cesium.Math.toRadians(-18),
+                    roll: 0
+                }
+            });
+        }
 
         // Zapamiętujemy widok początkowy
         initialCameraView = {
@@ -81,16 +102,16 @@ async function init() {
                 image: "entrance.png",
                 scale: 0.65,
                 verticalOrigin: Cesium.VerticalOrigin.CENTER,
-                show: false   // <-- kluczowe
+                show: false
             }
         });
 
         // Handler do kliknięć i hoverów
         const handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
 
-        // 🔗 Kliknięcie → otwórz panoramę
+        // Kliknięcie → otwórz panoramę
         handler.setInputAction(function (movement) {
-            if (!hotspot.billboard.show) return; // jeśli ukryty → ignoruj
+            if (!hotspot.billboard.show) return;
 
             const picked = viewer.scene.pick(movement.position);
             if (Cesium.defined(picked) && picked.id === hotspot) {
@@ -98,10 +119,8 @@ async function init() {
             }
         }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
 
-  
-
-        MIN_SCALE = 0.8
-        MAX_SCALE = 1.1
+        MIN_SCALE = 0.8;
+        MAX_SCALE = 1.1;
 
         // --- TOGGLE HOTSPOT ---
         const toggle = document.getElementById("hotspotToggle");
@@ -111,41 +130,35 @@ async function init() {
             toggle.click();
         });
 
-
         toggle.addEventListener("click", () => {
             hotspotVisible = !hotspotVisible;
 
-            // przełącz wygląd suwaka
             toggle.classList.toggle("on", hotspotVisible);
 
-            // przełącz widoczność kropki
             hotspot.billboard.show = hotspotVisible;
 
-            // reset skali po ponownym włączeniu
             if (hotspotVisible) {
                 hotspot.billboard.scale = MIN_SCALE;
             }
         });
 
-        // 🟦 Interaktywny hover (powiększanie kropki)
+        // Hover — powiększanie kropki
         handler.setInputAction(function (movement) {
-        if (!hotspot.billboard.show) {
-            viewer._container.style.cursor = "default";
-            return;
-        }
+            if (!hotspot.billboard.show) {
+                viewer._container.style.cursor = "default";
+                return;
+            }
 
-        const picked = viewer.scene.pick(movement.endPosition);
+            const picked = viewer.scene.pick(movement.endPosition);
 
-        if (Cesium.defined(picked) && picked.id === hotspot) {
-            hotspot.billboard.scale = MAX_SCALE;
-            viewer._container.style.cursor = "pointer";   // 🔥 kursor jak link
-        } else {
-            hotspot.billboard.scale = MIN_SCALE;
-            viewer._container.style.cursor = "default";   // wraca do normalnego
-        }
-    }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
-
-
+            if (Cesium.defined(picked) && picked.id === hotspot) {
+                hotspot.billboard.scale = MAX_SCALE;
+                viewer._container.style.cursor = "pointer";
+            } else {
+                hotspot.billboard.scale = MIN_SCALE;
+                viewer._container.style.cursor = "default";
+            }
+        }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
         // Reset widoku
         document.getElementById("resetViewBtn").addEventListener("click", () => {
@@ -165,4 +178,3 @@ async function init() {
 }
 
 init();
-

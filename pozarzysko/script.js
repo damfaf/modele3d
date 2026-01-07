@@ -90,7 +90,7 @@ async function createScene() {
   const result = await BABYLON.SceneLoader.ImportMeshAsync(
     "",
     "https://r2-proxy.damian-fafula.workers.dev/",
-    "ksiaz2.glb",
+    "pozarzysko/kosciol.glb",
     scene,
     (event) => {
       if (event.lengthComputable) {
@@ -137,9 +137,9 @@ async function createScene() {
   camera.setTarget(center);
 
   // Twoje ręczne ustawienia domyślnego widoku
-  camera.alpha = 0.252;
-  camera.beta = 1.308;
-  camera.radius = 19.613;
+  camera.alpha = 1.520;
+  camera.beta = 1.188;
+  camera.radius = 49.626;
   camera.lowerRadiusLimit = radius * 0.4;
   camera.upperRadiusLimit = radius * 6;
 
@@ -196,6 +196,18 @@ async function createScene() {
       userInteracted = true;
     }
   });
+
+  // Logowanie parametrów kamery w czasie rzeczywistym
+  scene.onBeforeRenderObservable.add(() => {
+      console.log(
+          "alpha:", camera.alpha.toFixed(3),
+          "beta:", camera.beta.toFixed(3),
+          "radius:", camera.radius.toFixed(3),
+          "lowerRadiusLimit:", camera.lowerRadiusLimit,
+          "upperRadiusLimit:", camera.upperRadiusLimit
+      );
+  });
+
 
   return scene;
 }
