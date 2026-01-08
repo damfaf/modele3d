@@ -97,7 +97,7 @@ async function createScene() {
 
     const result = await BABYLON.SceneLoader.ImportMeshAsync(
       "",
-      "https://r2-proxy.damian-fafula.workers.dev/", "ksiaz2a.glb",
+      "https://r2-proxy.damian-fafula.workers.dev/", "bolkow/bolkow.glb",
       scene,
       (event) => {
         if (event.lengthComputable) {
